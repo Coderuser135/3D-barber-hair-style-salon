@@ -27,16 +27,16 @@ export default function Hero() {
           className="max-w-2xl"
         >
           <span className="inline-block px-3 py-1 rounded-full glass text-xs font-medium text-gold-300 mb-4">
-            Premium Grooming Studio
+            AG Luxurious Unisex Salon & Academy
           </span>
           <h1 className="font-display text-4xl lg:text-6xl font-bold text-gray-50 leading-tight text-balance text-shadow-lg">
-            Your Style.<br />Your Signature.
+            Salon Services.<br />Your Style.
           </h1>
           <p className="mt-4 text-base lg:text-lg text-gray-300 max-w-lg text-balance">
             {salon.description}
           </p>
           <p className="mt-3 text-sm text-gray-400 max-w-lg">
-            Discover your next haircut, explore it in 3D and book your preferred style.
+            Browse hairstyle references, choose a preferred style, and contact the salon for an appointment.
           </p>
 
           <div className="mt-6 flex flex-col sm:flex-row gap-3">
