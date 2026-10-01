@@ -111,16 +111,6 @@ const hairstyles = [
   detail('hard-part-taper', 'Hard Part Taper', 'Classic', 15, { fadeType: 'Hard Part Taper' }),
   detail('comb-over-fade', 'Comb Over Fade', 'Classic', 0, { fadeType: 'Mid Fade' }),
   detail('modern-pompadour', 'Modern Pompadour', 'Pompadour', 1),
-  detail('textured-pompadour', 'Textured Pompadour', 'Pompadour', 2, { texture: 'Textured Volume' }),
-  detail('disconnected-undercut', 'Disconnected Undercut', 'Undercut', 3),
-  detail('slick-undercut', 'Slick Undercut', 'Undercut', 4, { texture: 'Slick' }),
-  detail('short-slick-back', 'Short Slick Back', 'Classic', 5, { topLength: '3–4 inches', texture: 'Slick' }),
-  detail('modern-buzz-fade', 'Modern Buzz Fade', 'Buzz', 6, { fadeType: 'Low Fade' }),
-  detail('textured-crew', 'Textured Crew', 'Buzz', 7, { texture: 'Textured' }),
-  detail('faux-hawk-fade', 'Faux Hawk Fade', 'Fade', 8, { fadeType: 'Mid Fade' }),
-  detail('brush-up-fade', 'Brush Up Fade', 'Fade', 9, { fadeType: 'Mid Fade', texture: 'Volume' }),
-  detail('textured-spikes', 'Textured Spikes', 'Textured', 10, { texture: 'Spiky' }),
-  detail('side-part-quiff', 'Side Part Quiff', 'Quiff', 11, { texture: 'Side-swept volume' }),
 ];
 
 // Keep the first 8 prominent in home sections.
