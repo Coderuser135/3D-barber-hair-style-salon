@@ -7,6 +7,7 @@ import { getHairstyleById } from '@/data/hairstyles';
 import { useFavorites } from '@/context/FavoritesContext';
 import { useCompare } from '@/context/CompareContext';
 import { useBooking } from '@/context/BookingContext';
+import HairstyleImage from '@/components/hairstyle/HairstyleImage';
 
 export default function HairstyleDetail() {
   const { id } = useParams();
@@ -86,11 +87,7 @@ export default function HairstyleDetail() {
               transition={{ duration: 0.35 }}
               className="relative overflow-hidden rounded-3xl card-surface"
             >
-              <img
-                src={hairstyle.image}
-                alt={`${hairstyle.name} hairstyle reference`}
-                className="w-full aspect-[4/5] object-cover"
-              />
+              <HairstyleImage hairstyle={hairstyle} alt={`${hairstyle.name} hairstyle reference`} className="w-full" />
               <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/75 via-black/20 to-transparent">
                 <span className="inline-flex items-center rounded-full bg-black/45 backdrop-blur px-3 py-1 text-xs font-medium text-white">
                   HD Hairstyle Reference
@@ -98,7 +95,7 @@ export default function HairstyleDetail() {
               </div>
             </motion.div>
             <p className="text-xs text-gray-500 mt-2 px-1">
-              Photo reference for this hairstyle. Rotate/3D controls are intentionally removed.
+              Photo reference for this hairstyle. The 3D viewer has been replaced with the supplied 50-style HD reference catalog.
             </p>
           </div>
 
