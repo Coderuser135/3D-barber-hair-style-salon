@@ -1,6 +1,5 @@
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { motion } from 'framer-motion';
 import { ArrowLeft, Heart, Calendar, GitCompare, Check, Clock, Droplets, Scissors, Sparkles, Info } from 'lucide-react';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 import PageTransition from '@/components/common/PageTransition';
