@@ -10,7 +10,7 @@ export const salon = {
   address: 'Front Gali of Aetiana, Bus Stand, Chitrawani Rd, Sarvodaya Nagar, Purnia, Bihar 854301',
   phone: '062028 15275',
   phoneRaw: '06202815275',
-  whatsapp: null,
+  whatsapp: '916202815275',
   email: null,
   googleRating: 5.0,
   googleReviewCount: 43,
@@ -28,4 +28,22 @@ export const salon = {
   ],
 };
 
-export const whatsappLink = () => null;
+export const whatsappLink = (message = '') => `https://wa.me/${salon.whatsapp}?text=${encodeURIComponent(message)}`;
+
+export const bookingWhatsAppLink = ({ service, hairstyle, date, time, name, phone, notes }) => {
+  const message = [
+    'Hello AG Luxurious Unisex Salon & Academy,',
+    '',
+    'I would like to enquire about an appointment:',
+    `Service: ${service || 'Not selected'}`,
+    `Hairstyle: ${hairstyle || 'Not selected'}`,
+    `Preferred date: ${date || 'Not selected'}`,
+    `Preferred time: ${time || 'Not selected'}`,
+    `Name: ${name || 'Not provided'}`,
+    `Customer phone: ${phone || 'Not provided'}`,
+    notes ? `Notes: ${notes}` : '',
+    '',
+    'Please confirm availability and current price.',
+  ].filter(Boolean).join('\\n');
+  return whatsappLink(message);
+};
