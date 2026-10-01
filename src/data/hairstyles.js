@@ -2,7 +2,7 @@
 // Indexes are fixed 0–49 so every visual tile maps to exactly one catalog item.
 // The site uses the supplied reference sprite; no procedural/3D hairstyle generation is used.
 
-const sprite = { src: '/images/hairstyles-50.webp', columns: 10, rows: 5 };
+const sprite = { src: '/images/hairstyles-50-clean-sprite.webp', columns: 10, rows: 5 };
 
 const style = (id,name,category,index,meta,extra={}) => ({
   id,name,category,index,spriteIndex:index,
