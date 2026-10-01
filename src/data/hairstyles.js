@@ -1,103 +1,86 @@
-// Production hairstyle catalog: 50 distinct boys/men cuts based on the supplied reference sheet.
-// The old procedural 3D viewer is intentionally removed.
-// Images use one exact 50-style reference sprite at /images/hairstyles-50.webp.
-// Each card/detail view crops one tile from that sprite, so the head/mannequin style stays consistent.
+// 50 distinct men's/ boys' hairstyles from the supplied 10x5 reference sheet.
+// Indexes are fixed 0–49 so every visual tile maps to exactly one catalog item.
+// The site uses the supplied reference sprite; no procedural/3D hairstyle generation is used.
 
-const sprite = {
-  src: '/images/hairstyles-50.webp',
-  columns: 10,
-  rows: 5,
-};
+const sprite = { src: '/images/hairstyles-50.webp', columns: 10, rows: 5 };
 
-const style = (id, name, category, index, meta, overrides = {}) => ({
-  id,
-  name,
-  category,
-  image: sprite.src,
-  spriteIndex: index,
-  spriteColumns: sprite.columns,
-  spriteRows: sprite.rows,
-  topLength: overrides.topLength || meta.topLength,
-  sideLength: overrides.sideLength || meta.sideLength,
-  backLength: overrides.backLength || meta.backLength,
-  fadeType: overrides.fadeType || meta.fadeType,
-  texture: overrides.texture || meta.texture,
-  maintenance: overrides.maintenance || 'Medium',
-  stylingTime: overrides.stylingTime || '5–10 min',
-  hairType: overrides.hairType || ['Straight', 'Wavy'],
-  difficulty: overrides.difficulty || 'Medium',
-  frequency: overrides.frequency || 'Every 3–4 weeks',
-  products: overrides.products || ['Matte clay', 'Styling powder'],
-  description: overrides.description || `${name} — a ${meta.texture.toLowerCase()} ${category.toLowerCase()} style with a clean, defined finish.`,
-  barberNotes: overrides.barberNotes || `Maintain the defining shape of the ${name}. Adjust length and texture to the client's density, hairline and growth pattern.`,
-  popular: index < 12,
-  featured: index < 8,
+const style = (id,name,category,index,meta,extra={}) => ({
+  id,name,category,index,spriteIndex:index,
+  image:sprite.src,spriteColumns:10,spriteRows:5,
+  topLength:meta.topLength,sideLength:meta.sideLength,backLength:meta.backLength,
+  fadeType:meta.fadeType,texture:meta.texture,
+  maintenance:extra.maintenance||'Medium',
+  stylingTime:extra.stylingTime||'5–10 min',
+  hairType:extra.hairType||['Straight','Wavy'],
+  difficulty:'Medium',
+  frequency:'Every 3–4 weeks',
+  products:extra.products||['Matte clay','Styling powder'],
+  description:`${name} — a ${meta.texture.toLowerCase()} ${category.toLowerCase()} style with a defined, barber-friendly shape.`,
+  barberNotes:`Ask for the ${name}. Preserve the defining silhouette, texture and length shown in the reference image; adjust for the client's hair density and growth pattern.`,
+  popular:index<12,featured:index<8
 });
 
-const SHORT = { topLength: '2–3 in', sideLength: '#1–#3', backLength: '#1–#3', fadeType: 'Taper / Fade', texture: 'Short' };
-const MEDIUM = { topLength: '3–4 in', sideLength: '#2–#3', backLength: '#2–#3', fadeType: 'Taper', texture: 'Medium' };
-const LONG = { topLength: '5–8 in', sideLength: 'Natural / tapered', backLength: 'Natural / layered', fadeType: 'None / Taper', texture: 'Layered' };
 
 const hairstyles = [
-  style('low-fade-textured-crop','Low Fade Textured Crop','Fade',0,{...SHORT,texture:'Textured'},{maintenance:'Low',hairType:['Straight','Wavy']}),
-  style('mid-fade-quiff','Mid Fade Quiff','Fade',1,{...MEDIUM,texture:'Volume'},{maintenance:'Medium',hairType:['Straight','Wavy']}),
-  style('high-fade-pompadour','High Fade Pompadour','Fade',2,{...MEDIUM,texture:'Volume'},{maintenance:'High',hairType:['Straight','Thick']}),
-  style('classic-taper','Classic Taper','Taper',3,{...MEDIUM,texture:'Natural'},{maintenance:'Low',hairType:['Straight','Wavy','Curly']}),
-  style('buzz-cut','Buzz Cut','Buzz',4,{topLength:'#2–#3 uniform',sideLength:'#2–#3',backLength:'#2–#3',fadeType:'None',texture:'Minimal'},{maintenance:'Very Low',stylingTime:'0–2 min',hairType:['Straight','Wavy','Curly','Coily'],difficulty:'Easy'}),
-  style('french-crop','French Crop','Crop',5,{...SHORT,texture:'Textured'},{maintenance:'Low'}),
-  style('caesar-cut','Caesar Cut','Crop',6,{...SHORT,texture:'Textured'},{maintenance:'Low'}),
-  style('ivy-league','Ivy League','Classic',7,{...MEDIUM,texture:'Clean'},{maintenance:'Medium'}),
-  style('short-back-and-sides','Short Back and Sides','Classic',8,{...SHORT,texture:'Clean'},{maintenance:'Low'}),
-  style('fade-undercut','Fade Undercut','Undercut',9,{...MEDIUM,texture:'Bold',fadeType:'Fade'},{maintenance:'Medium'}),
-  style('slick-back','Slick Back','Classic',10,{...MEDIUM,texture:'Polished'},{maintenance:'Medium',hairType:['Straight','Wavy'],products:['Pomade','Comb']}),
-  style('side-part','Side Part','Classic',11,{...MEDIUM,texture:'Neat'},{maintenance:'Medium',hairType:['Straight','Wavy'],products:['Pomade','Comb']}),
-  style('comb-over','Comb Over','Classic',12,{...MEDIUM,texture:'Elegant'},{maintenance:'Medium',hairType:['Straight','Wavy'],products:['Pomade','Comb']}),
-  style('pompadour','Pompadour','Pompadour',13,{...MEDIUM,texture:'Volume'},{maintenance:'High',hairType:['Straight','Thick'],products:['Pomade','Round brush']}),
-  style('textured-quiff','Textured Quiff','Quiff',14,{...MEDIUM,texture:'Textured'},{maintenance:'Medium',hairType:['Straight','Wavy']}),
-  style('messy-hair','Messy Hair','Textured',15,{...MEDIUM,texture:'Curly'},{maintenance:'Low',hairType:['Wavy','Curly']}),
-  style('curly-top-fade','Curly Top Fade','Curly',16,{...SHORT,texture:'Curly',fadeType:'Fade'},{maintenance:'Medium',hairType:['Curly','Coily'],products:['Curl cream','Leave-in conditioner']}),
-  style('wavy-medium','Wavy Medium','Wavy',17,{...MEDIUM,texture:'Wavy'},{maintenance:'Medium',hairType:['Wavy']}),
-  style('wolf-cut','Wolf Cut','Long',18,{...LONG,texture:'Layered'},{maintenance:'Medium',hairType:['Straight','Wavy']}),
-  style('mullet','Mullet','Long',19,{...LONG,texture:'Layered'},{maintenance:'Medium',hairType:['Straight','Wavy']}),
-  style('shag-cut','Shag Cut','Long',20,{...LONG,texture:'Layered'},{maintenance:'Medium',hairType:['Straight','Wavy']}),
-  style('curtain-bangs','Curtain Bangs','Long',21,{...LONG,texture:'Fringe'},{maintenance:'Medium',hairType:['Straight','Wavy']}),
-  style('bro-flow','Bro Flow','Long',22,{...LONG,texture:'Natural'},{maintenance:'Medium',hairType:['Straight','Wavy']}),
-  style('man-bun','Man Bun','Long',23,{...LONG,texture:'Tied'},{maintenance:'Medium',hairType:['Straight','Wavy','Curly']}),
-  style('top-knot','Top Knot','Long',24,{...LONG,texture:'Tied'},{maintenance:'Medium',hairType:['Straight','Wavy']}),
-  style('half-up-half-down','Half Up Half Down','Long',25,{...LONG,texture:'Tied'},{maintenance:'Medium',hairType:['Straight','Wavy']}),
-  style('cornrows','Cornrows','Textured',26,{...LONG,texture:'Braided'},{maintenance:'Medium',hairType:['Curly','Coily'],products:['Scalp oil','Leave-in conditioner']}),
-  style('afro','Afro','Curly',27,{...MEDIUM,texture:'Volume'},{maintenance:'Medium',hairType:['Curly','Coily'],products:['Curl cream','Moisturizer']}),
-  style('temple-fade','Temple Fade','Fade',28,{...SHORT,texture:'Sharp'},{maintenance:'Low'}),
-  style('skin-fade','Skin Fade','Fade',29,{...SHORT,texture:'Clean',fadeType:'Skin Fade'},{maintenance:'Medium'}),
-  style('drop-fade','Drop Fade','Fade',30,{...SHORT,texture:'Curved',fadeType:'Drop Fade'},{maintenance:'Medium'}),
-  style('burst-fade','Burst Fade','Fade',31,{...SHORT,texture:'Bold',fadeType:'Burst Fade'},{maintenance:'Medium'}),
-  style('mohawk','Mohawk','Textured',32,{...MEDIUM,texture:'Edgy',fadeType:'Fade'},{maintenance:'High',hairType:['Straight','Wavy'],products:['Matte clay','Styling powder']}),
-  style('faux-hawk','Faux Hawk','Textured',33,{...MEDIUM,texture:'Edgy'},{maintenance:'Medium',hairType:['Straight','Wavy']}),
-  style('textured-short-cut','Textured Short Cut','Textured',34,{...SHORT,texture:'Bold'},{maintenance:'Low'}),
-  style('flat-top','Flat Top','Classic',35,{...SHORT,texture:'Classic'},{maintenance:'Medium',hairType:['Straight','Thick']}),
-  style('bowl-cut','Bowl Cut','Classic',36,{...MEDIUM,texture:'Smooth'},{maintenance:'Medium',hairType:['Straight']}),
-  style('pageboy','Pageboy','Classic',37,{...MEDIUM,texture:'Smooth'},{maintenance:'Medium',hairType:['Straight']}),
-  style('modern-shag','Modern Shag','Long',38,{...LONG,texture:'Layered'},{maintenance:'Medium',hairType:['Straight','Wavy']}),
-  style('taper-fade','Taper Fade','Taper',39,{...SHORT,texture:'Clean',fadeType:'Taper'},{maintenance:'Low'}),
-  style('brush-back','Brush Back','Classic',40,{...MEDIUM,texture:'Smooth'},{maintenance:'Medium',hairType:['Straight','Wavy']}),
-  style('wet-look','Wet Look','Classic',41,{...MEDIUM,texture:'Slick'},{maintenance:'High',hairType:['Straight','Wavy'],products:['Gel','Comb']}),
-  style('side-swept','Side Swept','Long',42,{...MEDIUM,texture:'Flow'},{maintenance:'Medium',hairType:['Straight','Wavy']}),
-  style('spiky-fade','Spiky Fade','Fade',43,{...SHORT,texture:'Spiky',fadeType:'Fade'},{maintenance:'Medium',hairType:['Straight','Thick']}),
-  style('short-curly','Short Curly','Curly',44,{...SHORT,texture:'Curly'},{maintenance:'Medium',hairType:['Curly','Coily'],products:['Curl cream','Leave-in conditioner']}),
-  style('disconnected-undercut','Disconnected Undercut','Undercut',45,{...MEDIUM,texture:'Bold',fadeType:'Disconnected'},{maintenance:'Medium',hairType:['Straight','Wavy']}),
-  style('curly-taper','Curly Taper','Curly',46,{...SHORT,texture:'Curly',fadeType:'Taper'},{maintenance:'Medium',hairType:['Curly','Coily'],products:['Curl cream','Leave-in conditioner']}),
-  style('textured-crop','Textured Crop','Crop',47,{...SHORT,texture:'Textured'},{maintenance:'Low',hairType:['Straight','Wavy']}),
-  style('samurai-bun','Samurai Bun','Long',48,{...LONG,texture:'Tied'},{maintenance:'Medium',hairType:['Straight','Wavy'],products:['Hair tie','Light pomade']}),
+  style('low-fade-textured-crop','Low Fade Textured Crop','Fade',0,{topLength:'2–4 in',sideLength:'#0–#2',backLength:'#0–#2',fadeType:'Fade',texture:'Defined'},{maintenance:"Very Low",hairType:['Straight','Wavy']}),
+  style('mid-fade-quiff','Mid Fade Quiff','Fade',1,{topLength:'2–4 in',sideLength:'#0–#2',backLength:'#0–#2',fadeType:'Fade',texture:'Defined'},{maintenance:"Low",hairType:['Straight','Wavy']}),
+  style('high-fade-pompadour','High Fade Pompadour','Fade',2,{topLength:'2–4 in',sideLength:'#0–#2',backLength:'#0–#2',fadeType:'Fade',texture:'Defined'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('classic-taper','Classic Taper','Taper',3,{topLength:'2–4 in',sideLength:'#1–#3',backLength:'#1–#3',fadeType:'Taper',texture:'Natural'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('buzz-cut','Buzz Cut','Buzz',4,{topLength:'#2–#4',sideLength:'#2–#4',backLength:'#2–#4',fadeType:'None',texture:'Minimal'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('french-crop','French Crop','Crop',5,{topLength:'1–3 in',sideLength:'#1–#3',backLength:'#1–#3',fadeType:'Taper / Fade',texture:'Textured'},{maintenance:"Low",hairType:['Straight','Wavy']}),
+  style('caesar-cut','Caesar Cut','Crop',6,{topLength:'1–3 in',sideLength:'#1–#3',backLength:'#1–#3',fadeType:'Taper / Fade',texture:'Textured'},{maintenance:"Very Low",hairType:['Straight','Wavy']}),
+  style('crew-cut','Crew Cut','Short',7,{topLength:'1–3 in',sideLength:'#1–#3',backLength:'#1–#3',fadeType:'Taper',texture:'Clean'},{maintenance:"Low",hairType:['Straight','Wavy']}),
+  style('ivy-league','Ivy League','Classic',8,{topLength:'3–5 in',sideLength:'#2–#3',backLength:'#2–#3',fadeType:'Taper / None',texture:'Clean'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('fade-undercut','Fade Undercut','Undercut',9,{topLength:'3–5 in',sideLength:'#1–#2',backLength:'#1–#2',fadeType:'Disconnected',texture:'Bold'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('slick-back','Slick Back','Classic',10,{topLength:'3–5 in',sideLength:'#2–#3',backLength:'#2–#3',fadeType:'Taper / None',texture:'Clean'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('side-part','Side Part','Classic',11,{topLength:'3–5 in',sideLength:'#2–#3',backLength:'#2–#3',fadeType:'Taper / None',texture:'Clean'},{maintenance:"Low",hairType:['Straight','Wavy']}),
+  style('comb-over','Comb Over','Classic',12,{topLength:'3–5 in',sideLength:'#2–#3',backLength:'#2–#3',fadeType:'Taper / None',texture:'Clean'},{maintenance:"Very Low",hairType:['Straight','Wavy']}),
+  style('pompadour','Pompadour','Pompadour',13,{topLength:'4–6 in',sideLength:'#1–#3',backLength:'#1–#3',fadeType:'Fade / Taper',texture:'Volume'},{maintenance:"Low",hairType:['Straight','Wavy']}),
+  style('textured-quiff','Textured Quiff','Quiff',14,{topLength:'3–5 in',sideLength:'#1–#3',backLength:'#1–#3',fadeType:'Fade / Taper',texture:'Volume'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('messy-hair','Messy Hair','Textured',15,{topLength:'3–5 in',sideLength:'#1–#3',backLength:'#1–#3',fadeType:'Fade / Taper',texture:'Textured'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('curly-top-fade','Curly Top Fade','Curly',16,{topLength:'2–5 in',sideLength:'#1–#3',backLength:'#1–#3',fadeType:'Fade / Taper',texture:'Curly'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('wavy-medium','Wavy Medium','Wavy',17,{topLength:'4–7 in',sideLength:'Natural',backLength:'Natural',fadeType:'None / Taper',texture:'Wavy'},{maintenance:"Low",hairType:['Straight','Wavy']}),
+  style('long-wavy','Long Wavy','Long',18,{topLength:'5–8 in',sideLength:'Natural / tapered',backLength:'Natural / layered',fadeType:'None / Taper',texture:'Layered'},{maintenance:"Very Low",hairType:['Straight','Wavy']}),
+  style('wolf-cut','Wolf Cut','Long',19,{topLength:'5–8 in',sideLength:'Natural / tapered',backLength:'Natural / layered',fadeType:'None / Taper',texture:'Layered'},{maintenance:"Low",hairType:['Straight','Wavy']}),
+  style('mullet','Mullet','Long',20,{topLength:'5–8 in',sideLength:'Natural / tapered',backLength:'Natural / layered',fadeType:'None / Taper',texture:'Layered'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('shag-cut','Shag Cut','Long',21,{topLength:'5–8 in',sideLength:'Natural / tapered',backLength:'Natural / layered',fadeType:'None / Taper',texture:'Layered'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('curtain-bangs','Curtain Bangs','Long',22,{topLength:'5–8 in',sideLength:'Natural / tapered',backLength:'Natural / layered',fadeType:'None / Taper',texture:'Layered'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('bro-flow','Bro Flow','Long',23,{topLength:'5–8 in',sideLength:'Natural / tapered',backLength:'Natural / layered',fadeType:'None / Taper',texture:'Layered'},{maintenance:"Low",hairType:['Straight','Wavy']}),
+  style('man-bun','Man Bun','Long',24,{topLength:'5–8 in',sideLength:'Natural / tapered',backLength:'Natural / layered',fadeType:'None / Taper',texture:'Layered'},{maintenance:"Very Low",hairType:['Straight','Wavy']}),
+  style('top-knot','Top Knot','Long',25,{topLength:'5–8 in',sideLength:'Natural / tapered',backLength:'Natural / layered',fadeType:'None / Taper',texture:'Layered'},{maintenance:"Low",hairType:['Straight','Wavy']}),
+  style('half-up-half-down','Half Up Half Down','Long',26,{topLength:'5–8 in',sideLength:'Natural / tapered',backLength:'Natural / layered',fadeType:'None / Taper',texture:'Layered'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('cornrows','Cornrows','Braids',27,{topLength:'Medium–Long',sideLength:'Taper / natural',backLength:'Natural',fadeType:'None / Taper',texture:'Braided'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('braided-rows','Braided Rows','Braids',28,{topLength:'Medium–Long',sideLength:'Taper / natural',backLength:'Natural',fadeType:'None / Taper',texture:'Braided'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('afro','Afro','Curly',29,{topLength:'2–5 in',sideLength:'#1–#3',backLength:'#1–#3',fadeType:'Fade / Taper',texture:'Curly'},{maintenance:"Low",hairType:['Straight','Wavy']}),
+  style('temple-fade','Temple Fade','Fade',30,{topLength:'2–4 in',sideLength:'#0–#2',backLength:'#0–#2',fadeType:'Fade',texture:'Defined'},{maintenance:"Very Low",hairType:['Straight','Wavy']}),
+  style('skin-fade','Skin Fade','Fade',31,{topLength:'2–4 in',sideLength:'#0–#2',backLength:'#0–#2',fadeType:'Fade',texture:'Defined'},{maintenance:"Low",hairType:['Straight','Wavy']}),
+  style('drop-fade','Drop Fade','Fade',32,{topLength:'2–4 in',sideLength:'#0–#2',backLength:'#0–#2',fadeType:'Fade',texture:'Defined'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('burst-fade','Burst Fade','Fade',33,{topLength:'2–4 in',sideLength:'#0–#2',backLength:'#0–#2',fadeType:'Fade',texture:'Defined'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('mohawk','Mohawk','Textured',34,{topLength:'3–5 in',sideLength:'#1–#3',backLength:'#1–#3',fadeType:'Fade / Taper',texture:'Textured'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('faux-hawk','Faux Hawk','Textured',35,{topLength:'3–5 in',sideLength:'#1–#3',backLength:'#1–#3',fadeType:'Fade / Taper',texture:'Textured'},{maintenance:"Low",hairType:['Straight','Wavy']}),
+  style('spiky-crop','Spiky Crop','Textured',36,{topLength:'3–5 in',sideLength:'#1–#3',backLength:'#1–#3',fadeType:'Fade / Taper',texture:'Textured'},{maintenance:"Very Low",hairType:['Straight','Wavy']}),
+  style('flat-top','Flat Top','Classic',37,{topLength:'3–5 in',sideLength:'#2–#3',backLength:'#2–#3',fadeType:'Taper / None',texture:'Clean'},{maintenance:"Low",hairType:['Straight','Wavy']}),
+  style('bowl-cut','Bowl Cut','Classic',38,{topLength:'3–5 in',sideLength:'#2–#3',backLength:'#2–#3',fadeType:'Taper / None',texture:'Clean'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('pageboy','Pageboy','Classic',39,{topLength:'3–5 in',sideLength:'#2–#3',backLength:'#2–#3',fadeType:'Taper / None',texture:'Clean'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('modern-shag','Modern Shag','Long',40,{topLength:'5–8 in',sideLength:'Natural / tapered',backLength:'Natural / layered',fadeType:'None / Taper',texture:'Layered'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('taper-fade','Taper Fade','Fade',41,{topLength:'2–4 in',sideLength:'#0–#2',backLength:'#0–#2',fadeType:'Fade',texture:'Defined'},{maintenance:"Low",hairType:['Straight','Wavy']}),
+  style('brush-back','Brush Back','Classic',42,{topLength:'3–5 in',sideLength:'#2–#3',backLength:'#2–#3',fadeType:'Taper / None',texture:'Clean'},{maintenance:"Very Low",hairType:['Straight','Wavy']}),
+  style('wet-look','Wet Look','Classic',43,{topLength:'3–5 in',sideLength:'#2–#3',backLength:'#2–#3',fadeType:'Taper / None',texture:'Clean'},{maintenance:"Low",hairType:['Straight','Wavy']}),
+  style('side-swept','Side Swept','Long',44,{topLength:'5–8 in',sideLength:'Natural / tapered',backLength:'Natural / layered',fadeType:'None / Taper',texture:'Layered'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('spiky-fade','Spiky Fade','Fade',45,{topLength:'2–4 in',sideLength:'#0–#2',backLength:'#0–#2',fadeType:'Fade',texture:'Defined'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('short-curly','Short Curly','Curly',46,{topLength:'2–5 in',sideLength:'#1–#3',backLength:'#1–#3',fadeType:'Fade / Taper',texture:'Curly'},{maintenance:"Medium",hairType:['Straight','Wavy']}),
+  style('curly-crop','Curly Crop','Curly',47,{topLength:'2–5 in',sideLength:'#1–#3',backLength:'#1–#3',fadeType:'Fade / Taper',texture:'Curly'},{maintenance:"Low",hairType:['Straight','Wavy']}),
+  style('disconnected-undercut','Disconnected Undercut','Undercut',48,{topLength:'3–5 in',sideLength:'#1–#2',backLength:'#1–#2',fadeType:'Disconnected',texture:'Bold'},{maintenance:"Very Low",hairType:['Straight','Wavy']}),
+  style('samurai-bun','Samurai Bun','Long',49,{topLength:'5–8 in',sideLength:'Natural / tapered',backLength:'Natural / layered',fadeType:'None / Taper',texture:'Layered'},{maintenance:"Low",hairType:['Straight','Wavy']})
 ];
 
 export { hairstyles };
-
-export const categories = ['All','Fade','Taper','Crop','Buzz','Quiff','Pompadour','Undercut','Curly','Textured','Classic','Long','Wavy'];
-export const hairTypes = ['Straight','Wavy','Curly','Coily','Thick'];
-export const fadeTypes = ['Low Fade','Mid Fade','High Fade','Skin Fade','Taper','Disconnected','None','Drop Fade','Burst Fade','Shadow Fade','Temple Fade'];
-export const maintenanceLevels = ['Very Low','Low','Medium','High'];
-export const lengthOptions = ['Short','Medium','Long'];
-export const sortOptions = ['Popular','A–Z','Z–A','Low Maintenance','High Maintenance'];
-export const getHairstyleById = (id) => hairstyles.find((h) => h.id === id);
-export const getFeaturedHairstyles = () => hairstyles.filter((h) => h.featured);
-export const getPopularHairstyles = () => hairstyles.filter((h) => h.popular);
+export const categories=['All',...new Set(hairstyles.map(h=>h.category))];
+export const hairTypes=['Straight','Wavy','Curly','Coily','Thick'];
+export const fadeTypes=['Low Fade','Mid Fade','High Fade','Skin Fade','Taper','Disconnected','Drop Fade','Burst Fade','Temple Fade','None'];
+export const maintenanceLevels=['Very Low','Low','Medium','High'];
+export const lengthOptions=['Short','Medium','Long'];
+export const sortOptions=['Popular','A–Z','Z–A','Low Maintenance','High Maintenance'];
+export const getHairstyleById=(id)=>hairstyles.find(h=>h.id===id);
+export const getFeaturedHairstyles=()=>hairstyles.filter(h=>h.featured);
+export const getPopularHairstyles=()=>hairstyles.filter(h=>h.popular);
