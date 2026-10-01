@@ -1,39 +1,31 @@
-// Centralized salon information — easy to replace with real data
+// Verified business details captured from the provided Google Business Profile screenshots.
+// Keep this file as the single source of truth for salon contact information.
 export const salon = {
-  name: 'Blade & Bone',
-  tagline: 'Your Style. Your Signature.',
+  name: 'AG Luxurious Unisex Salon & Academy',
+  hindiName: 'आग लजरीयस यूनिसेक्स सैलून & एकेडमी',
+  category: 'Make-up artist',
+  tagline: 'Salon, Styling & Beauty Academy',
   description:
-    'A premium grooming studio where modern craft meets timeless tradition. Every cut is tailored, every detail intentional.',
-  address: '124 Grooming Lane, Arts District, Metropolis',
-  phone: '+1 (555) 010-2470',
-  phoneRaw: '+15550102470',
-  whatsapp: '15550102470',
-  email: 'hello@bladeandbone.studio',
-  hours: [
-    { day: 'Monday', time: '9:00 AM – 7:00 PM' },
-    { day: 'Tuesday', time: '9:00 AM – 7:00 PM' },
-    { day: 'Wednesday', time: '9:00 AM – 7:00 PM' },
-    { day: 'Thursday', time: '9:00 AM – 8:00 PM' },
-    { day: 'Friday', time: '9:00 AM – 8:00 PM' },
-    { day: 'Saturday', time: '8:00 AM – 6:00 PM' },
-    { day: 'Sunday', time: 'Closed' },
-  ],
+    'AG Luxurious Unisex Salon & Academy is a unisex salon and beauty academy in Purnea, Bihar. Explore hairstyle references and contact the salon for appointments and current service pricing.',
+  address: 'Front Gali of Aetiana, Bus Stand, Chitrawani Rd, Sarvodaya Nagar, Purnia, Bihar 854301',
+  phone: '062028 15275',
+  phoneRaw: '06202815275',
+  whatsapp: null,
+  email: null,
+  googleRating: 5.0,
+  googleReviewCount: 43,
+  hoursSummary: 'Open · Closes 9 PM',
   socials: {
     instagram: 'https://instagram.com',
-    facebook: 'https://facebook.com',
-    twitter: 'https://twitter.com',
-    tiktok: 'https://tiktok.com',
   },
-  mapEmbed:
-    'https://www.openstreetmap.org/export/embed.html?bbox=-0.13%2C51.5%2C-0.1%2C51.52&layer=mapnik',
-  founded: 2018,
+  mapsSearchUrl:
+    'https://www.google.com/maps/search/?api=1&query=AG%20Luxurious%20Unisex%20Salon%20%26%20Academy%2C%20Front%20Gali%20of%20Aetiana%2C%20Bus%20Stand%2C%20Chitrawani%20Rd%2C%20Sarvodaya%20Nagar%2C%20Purnia%2C%20Bihar%20854301',
   stats: [
-    { label: 'Years of Craft', value: '7+' },
-    { label: 'Happy Clients', value: '12K+' },
-    { label: 'Master Barbers', value: '6' },
-    { label: 'Avg. Rating', value: '4.9' },
+    { label: 'Google Rating', value: '5.0★' },
+    { label: 'Google Reviews', value: '43' },
+    { label: 'Category', value: 'Make-up Artist' },
+    { label: 'Closing Time', value: '9 PM' },
   ],
 };
 
-export const whatsappLink = (message) =>
-  `https://wa.me/${salon.whatsapp}?text=${encodeURIComponent(message || 'Hi, I would like to book a haircut appointment.')}`;
+export const whatsappLink = () => null;
