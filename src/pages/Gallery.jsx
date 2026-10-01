@@ -24,7 +24,7 @@ export default function Gallery() {
     <PageTransition>
       <div className="px-5 lg:px-12 lg:max-w-7xl lg:mx-auto pt-6 pb-10">
         <h1 className="font-display text-3xl font-bold text-gray-50 mb-1">Gallery</h1>
-        <p className="text-sm text-gray-500 mb-5">A look inside the craft and the studio</p>
+        <p className="text-sm text-gray-500 mb-5">Sample hairstyle and salon inspiration images. These are reference images, not claimed as salon-owned photos.</p>
 
         <div className="mb-5">
           <CategoryChips categories={galleryCategories} active={category} onSelect={setCategory} />
