@@ -78,7 +78,7 @@ export default function HairstyleDetail() {
           Back
         </button>
 
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-10">
+        <div className="grid lg:grid-cols-2 lg:items-start gap-8 lg:gap-10">
           {/* HD hairstyle photo */}
           <div>
             <motion.div
@@ -87,7 +87,7 @@ export default function HairstyleDetail() {
               transition={{ duration: 0.35 }}
               className="relative overflow-hidden rounded-3xl card-surface"
             >
-              <HairstyleImage hairstyle={hairstyle} alt={`${hairstyle.name} hairstyle reference`} className="w-full" />
+              <HairstyleImage hairstyle={hairstyle} size="detail" alt={`${hairstyle.name} hairstyle reference`} className="w-full object-contain" />
               <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/75 via-black/20 to-transparent">
                 <span className="inline-flex items-center rounded-full bg-black/45 backdrop-blur px-3 py-1 text-xs font-medium text-white">
                   HD Hairstyle Reference
@@ -100,7 +100,7 @@ export default function HairstyleDetail() {
           </div>
 
           {/* Details */}
-          <div className="px-5 lg:px-0">
+          <div className="px-5 lg:px-0 lg:pt-0">
             <span className="inline-block px-3 py-1 rounded-full bg-gold-400/10 text-xs font-medium text-gold-300 mb-3">
               {hairstyle.category}
             </span>
