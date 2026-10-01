@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, ChevronLeft, ChevronRight, Calendar, Clock, Scissors, Sparkles, CheckCircle2, Phone } from 'lucide-react';
+import { Check, ChevronLeft, ChevronRight, Calendar, Clock, Scissors, Sparkles, CheckCircle2, MessageCircle } from 'lucide-react';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 import PageTransition from '@/components/common/PageTransition';
 import { useBooking } from '@/context/BookingContext';
 import { services } from '@/data/services';
 import { hairstyles } from '@/data/hairstyles';
-import { salon } from '@/data/salon';
+import { salon, bookingWhatsAppLink } from '@/data/salon';
 
 const steps = [
   { label: 'Service', icon: Sparkles },
@@ -51,6 +51,7 @@ export default function Book() {
   if (confirmed) {
     const service = services.find((s) => s.id === booking.serviceId);
     const hairstyle = hairstyles.find((h) => h.id === booking.hairstyleId);
+    const whatsappUrl = bookingWhatsAppLink({ service: service?.name, hairstyle: hairstyle?.name, date: booking.date, time: booking.time, name: booking.name, phone: booking.phone, notes: booking.notes });
     return (
       <PageTransition>
         <div className="px-5 lg:px-12 lg:max-w-2xl lg:mx-auto pt-10 pb-10">
@@ -67,7 +68,7 @@ export default function Book() {
               <div className="flex justify-between text-sm"><span className="text-gray-500">Phone</span><span className="text-gray-200">{booking.phone}</span></div>
             </div>
             <div className="flex gap-3">
-              <a href={`tel:${salon.phoneRaw}`} className="btn-gold flex-1 py-3 text-sm inline-flex items-center justify-center gap-2"><Phone size={16} /> Call Salon</a>
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn-gold flex-1 py-3 text-sm inline-flex items-center justify-center gap-2"><MessageCircle size={16} /> Send on WhatsApp</a>
               <button onClick={() => { resetBooking(); setStep(0); navigate('/'); }} className="btn-outline flex-1 py-3 text-sm">Done</button>
             </div>
           </div>
