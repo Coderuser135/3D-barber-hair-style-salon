@@ -1,0 +1,58 @@
+export const barbers = [
+  {
+    id: 'marcus-reed',
+    name: 'Marcus Reed',
+    role: 'Master Barber & Founder',
+    image: 'https://images.pexels.com/photos/5188606/pexels-photo-5188606.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    specialization: 'Fades & Classic Cuts',
+    experience: '15 years',
+    bio: 'Marcus founded Blade & Bone with a vision: to blend old-school barbering craft with modern technique. His fades are legendary in the Arts District.',
+  },
+  {
+    id: 'diego-vega',
+    name: 'Diego Vega',
+    role: 'Senior Barber',
+    image: 'https://images.pexels.com/photos/3998407/pexels-photo-3998407.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    specialization: 'Beard Sculpting & Pompadours',
+    experience: '10 years',
+    bio: 'Diego brings precision and artistry to every cut. His beard sculpting and pompadour work have earned a loyal following.',
+  },
+  {
+    id: 'james-cole',
+    name: 'James Cole',
+    role: 'Barber',
+    image: 'https://images.pexels.com/photos/3998402/pexels-photo-3998402.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    specialization: 'Textured Crops & Curly Hair',
+    experience: '7 years',
+    bio: 'James specializes in modern textured cuts and curly hair. He is our go-to for French crops and natural texture work.',
+  },
+  {
+    id: 'omar-hassan',
+    name: 'Omar Hassan',
+    role: 'Barber',
+    image: 'https://images.pexels.com/photos/3998413/pexels-photo-3998413.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    specialization: 'Skin Fades & Undercuts',
+    experience: '6 years',
+    bio: 'Omar is known for razor-sharp skin fades and bold undercuts. His attention to detail is unmatched.',
+  },
+  {
+    id: 'leo-park',
+    name: 'Leo Park',
+    role: 'Barber',
+    image: 'https://images.pexels.com/photos/9992819/pexels-photo-9992819.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    specialization: "Kids' Cuts & Classic Styles",
+    experience: '5 years',
+    bio: 'Leo has a patient, friendly approach that makes him perfect for kids and first-time clients. His classic cuts are timeless.',
+  },
+  {
+    id: 'sam-rivera',
+    name: 'Sam Rivera',
+    role: 'Junior Barber',
+    image: 'https://images.pexels.com/photos/3998404/pexels-photo-3998404.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    specialization: 'Quiffs & Styling',
+    experience: '3 years',
+    bio: 'Sam is our styling specialist. From quiffs to slick backs, he knows how to make your hair hold all day.',
+  },
+];
+
+export const getBarberById = (id) => barbers.find((b) => b.id === id);
