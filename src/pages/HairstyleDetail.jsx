@@ -1,5 +1,5 @@
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { Suspense, lazy } from 'react';
+import { motion } from 'framer-motion';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Heart, Calendar, GitCompare, Check, Clock, Droplets, Scissors, Sparkles, Info } from 'lucide-react';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
@@ -8,8 +8,6 @@ import { getHairstyleById } from '@/data/hairstyles';
 import { useFavorites } from '@/context/FavoritesContext';
 import { useCompare } from '@/context/CompareContext';
 import { useBooking } from '@/context/BookingContext';
-
-const HairStyleViewer = lazy(() => import('@/components/hairstyle/HairStyleViewer'));
 
 export default function HairstyleDetail() {
   const { id } = useParams();
@@ -81,22 +79,28 @@ export default function HairstyleDetail() {
         </button>
 
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-10">
-          {/* 3D Viewer */}
+          {/* HD hairstyle photo */}
           <div>
-            <div className="relative">
-              <Suspense
-                fallback={
-                  <div className="aspect-square lg:aspect-[4/5] card-surface flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="w-8 h-8 mx-auto mb-3 border-2 border-gold-400/20 border-t-gold-400 rounded-full animate-spin" />
-                      <p className="text-sm text-gold-300">Loading 3D viewer…</p>
-                    </div>
-                  </div>
-                }
-              >
-                <HairStyleViewer hairstyle={hairstyle} className="aspect-square lg:aspect-[4/5] card-surface" />
-              </Suspense>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.985 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.35 }}
+              className="relative overflow-hidden rounded-3xl card-surface"
+            >
+              <img
+                src={hairstyle.image}
+                alt={`${hairstyle.name} hairstyle reference`}
+                className="w-full aspect-[4/5] object-cover"
+              />
+              <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/75 via-black/20 to-transparent">
+                <span className="inline-flex items-center rounded-full bg-black/45 backdrop-blur px-3 py-1 text-xs font-medium text-white">
+                  HD Hairstyle Reference
+                </span>
+              </div>
+            </motion.div>
+            <p className="text-xs text-gray-500 mt-2 px-1">
+              Photo reference for this hairstyle. Rotate/3D controls are intentionally removed.
+            </p>
           </div>
 
           {/* Details */}
