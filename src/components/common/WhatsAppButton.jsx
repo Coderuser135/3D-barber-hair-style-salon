@@ -5,7 +5,7 @@ import { whatsappLink } from '@/data/salon';
 export default function WhatsAppButton() {
   return (
     <motion.a
-      href={whatsappLink()}
+      href={whatsappLink('Hello AG Luxurious Unisex Salon & Academy, I would like to enquire about your services and appointment availability.')} 
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contact us on WhatsApp"
