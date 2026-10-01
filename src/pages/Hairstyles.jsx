@@ -84,7 +84,7 @@ export default function Hairstyles() {
     <PageTransition>
       <div className="px-5 lg:px-12 lg:max-w-7xl lg:mx-auto pt-6 pb-10">
         <h1 className="font-display text-3xl font-bold text-gray-50 mb-1">Hairstyles</h1>
-        <p className="text-sm text-gray-500 mb-5">Explore {hairstyles.length} styles in 3D and find your match</p>
+        <p className="text-sm text-gray-500 mb-5">Explore {hairstyles.length} HD hairstyle references and find your match</p>
 
       {showCompare && compareIds.length >= 2 ? (
         <CompareView />
