@@ -1,6 +1,16 @@
-export default function HairstyleImage({ hairstyle, className = '', alt = '' }) {
+export default function HairstyleImage({
+  hairstyle,
+  className = '',
+  alt = '',
+  size = 'card',
+}) {
+  const sizeClass =
+    size === 'detail'
+      ? 'w-full aspect-[4/5] min-h-[360px] lg:min-h-[520px]'
+      : 'w-full aspect-[4/5] max-h-[260px]';
+
   return (
-    <div className="relative w-full aspect-[4/5] max-h-[260px] overflow-hidden bg-ink-700">
+    <div className={`relative ${sizeClass} overflow-hidden bg-ink-700`}>
       <img
         src={hairstyle.image}
         alt={alt || hairstyle.name}
