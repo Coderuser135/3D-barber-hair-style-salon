@@ -1,28 +1,19 @@
-// 50-image hairstyle catalog for the salon app.
+// 50-style boys/men hairstyle catalog for the salon app.
 // The 3D viewer has been removed. Each entry keeps the same structured
 // cut specifications so the booking, compare and filter features continue to work.
 //
-// Image note: these are temporary mannequin/hairstyling reference sources.
+// Image note: these are male mannequin/hairstyling reference sources.
 // The exact supplied reference style (faceless white mannequin + realistic hair)
 // should be used as the final local asset set once 50 matching HD assets are available.
 
 const imagePool = [
-  'https://images.pexels.com/photos/17320163/pexels-photo-17320163.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/17320164/pexels-photo-17320164.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/17320162/pexels-photo-17320162.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/6923476/pexels-photo-6923476.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/9547827/pexels-photo-9547827.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/14355689/pexels-photo-14355689.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/7702774/pexels-photo-7702774.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/8481592/pexels-photo-8481592.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/8481593/pexels-photo-8481593.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/10303066/pexels-photo-10303066.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/7745272/pexels-photo-7745272.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/10303022/pexels-photo-10303022.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/12377012/pexels-photo-12377012.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/104343/pexels-photo-104343.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/7027834/pexels-photo-7027834.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/17523435/pexels-photo-17523435.jpeg?auto=compress&cs=tinysrgb&w=1600',
+  // Male / boy hairstyle references only. Blank/faceless mannequin style,
+  // matching the supplied reference direction as closely as available online.
+  'https://media.hairtical.com/2026/03/hair-system-instant-results-69b39605771fe.webp',
+  'https://www.kapillus.fr/cdn/shop/files/PhotocoupeVolumisKapillus.jpg?v=1733154254&width=1440',
+  'https://www.kapillus.fr/cdn/shop/files/PhotocoupeOndulisKapillus_6.jpg?v=1733154394&width=1440',
+  'https://www.exalto-professional-shop.com/img/layerslider/Mode-slider/thomas.jpg',
+  'https://www.b-zone.biz/html/upload/save_image/0806145449_5d4916296ffda.jpg',
 ];
 
 const specByCategory = {
